@@ -35,7 +35,7 @@ const Login = ({
 }: Login2Props) => {
   return (
     <section className={cn("h-screen bg-muted", className)}>
-      <div className="flex h-full items-center justify-center">
+      <div className="flex -h-44 items-center justify-center">
         <div className="flex flex-col items-center gap-6 lg:justify-start">
           {/* Logo */}
           <a href={logo.url}>
