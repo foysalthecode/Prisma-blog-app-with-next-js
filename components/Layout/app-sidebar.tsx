@@ -1,14 +1,10 @@
 import * as React from "react";
-
-import { SearchForm } from "@/components/Layout/search-form";
-import { VersionSwitcher } from "@/components/Layout/version-switcher";
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
-  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -17,25 +13,7 @@ import {
 import Link from "next/link";
 import { adminRoutes } from "@/src/adminRoutes";
 import { userRoutes } from "@/src/userRoutes";
-
-// This is sample data.
-const data = {
-  navMain: [
-    {
-      title: "Getting Started",
-      items: [
-        {
-          title: "User Dashborad",
-          url: "/dashboard",
-        },
-        {
-          title: "Admin Dashboard",
-          url: "/admin-dashboard",
-        },
-      ],
-    },
-  ],
-};
+import { Route } from "@/src/types";
 
 export function AppSidebar({
   user,
@@ -43,7 +21,7 @@ export function AppSidebar({
 }: {
   user: { role: string } & React.ComponentProps<typeof Sidebar>;
 }) {
-  let routes = [];
+  let routes: Route[] = [];
 
   switch (user.role) {
     case "admin":
