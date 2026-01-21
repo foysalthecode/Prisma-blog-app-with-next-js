@@ -1,10 +1,45 @@
 import { NextRequest, NextResponse } from "next/server";
+import { userService } from "./services/user.service";
+import { Roles } from "./constants/roles";
 
-export const proxy = (request: NextRequest) => {
-  console.log(request.url);
+export const proxy = async (request: NextRequest) => {
+  const pathName = request.nextUrl.pathname;
+
+  let isAuthenticated = false;
+  let isAdmin = false;
+
+  const { data } = await userService.getSession();
+
+  if (data) {
+    isAuthenticated = true;
+    isAdmin = data.user.role === Roles.admin;
+  }
+
+  //* user is not authenticated at all
+  if (!isAuthenticated) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+
+  //*user is authenticated and role = ADMIN
+  //* admin cannto visit user dashboard
+  if (isAdmin && pathName.startsWith("/dashboard")) {
+    return NextResponse.redirect(new URL("admin-dashboard", request.url));
+  }
+
+  //*user is authenticated and role = USER
+  //* user cannto visit admin dashboard
+  if (!isAdmin && pathName.startsWith("/admin-dashboard")) {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
+
   return NextResponse.next();
 };
 
 export const config = {
-  matcher: ["/dashboard"],
+  matcher: [
+    "/dashboard",
+    "/dashboard/:path*",
+    "/admin-dashboard",
+    "/admin-dashboard/:path*",
+  ],
 };
