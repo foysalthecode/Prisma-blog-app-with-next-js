@@ -3,6 +3,10 @@ import { env } from "../env";
 
 const AUTH_URL = env.AUTH_URL;
 
+//* No dynamic and No {Cache no-store} : SSG - static page
+//* {Cache no-store} : SSR - Dynamic page
+//* next: { revalidate: 10 } : ISR - Mix Between Static and Dynamic
+
 export const userService = {
   getSession: async function () {
     try {
@@ -14,7 +18,7 @@ export const userService = {
         headers: {
           Cookie: cookieStore.toString(),
         },
-        cache: "no-store",
+        next: { revalidate: 10 },
       });
 
       const session = await res.json();
