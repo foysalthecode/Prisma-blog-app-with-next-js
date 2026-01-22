@@ -1,9 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { userService } from "@/src/services/user.service";
-import { cookies } from "next/headers";
+import { blogService } from "@/src/services/blog.service";
 
 export default async function Home() {
-  const { data } = await userService.getSession();
+  const { data } = await blogService.getBlogPost();
 
   console.log(data);
 

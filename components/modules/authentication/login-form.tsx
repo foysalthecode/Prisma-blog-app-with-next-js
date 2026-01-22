@@ -29,6 +29,18 @@ export function LoginForm({
     console.log(data);
   };
 
+  // const handleSignIn = async (e) => {
+  //   const email = e.target.value;
+  //   const password = e.target.password;
+    // const data = await authClient.signIn.email({
+    //   email: "john.doe@example.com", // required
+    //   password: "password1234", // required
+    //   rememberMe: true,
+    //   callbackURL: "https://example.com/callback",
+    // });
+  //   console.log({ email, password });
+  // };
+
   const session = authClient.useSession();
   console.log(session);
 
@@ -48,6 +60,7 @@ export function LoginForm({
                 <FieldLabel htmlFor="email">Email</FieldLabel>
                 <Input
                   id="email"
+                  name="email"
                   type="email"
                   placeholder="m@example.com"
                   required
@@ -63,7 +76,7 @@ export function LoginForm({
                     Forgot your password?
                   </a>
                 </div>
-                <Input id="password" type="password" required />
+                <Input id="password" type="password" name="password" required />
               </Field>
               <Field>
                 <Button type="submit">Login</Button>
