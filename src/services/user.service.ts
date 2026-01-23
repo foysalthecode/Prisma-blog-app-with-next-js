@@ -18,7 +18,7 @@ export const userService = {
         headers: {
           Cookie: cookieStore.toString(),
         },
-        next: { revalidate: 10 },
+        cache: "no-store",
       });
 
       const session = await res.json();
