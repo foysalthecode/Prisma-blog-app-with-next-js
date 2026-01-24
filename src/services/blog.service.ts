@@ -15,7 +15,7 @@ interface GetBlogsParams {
 
 export const blogService = {
   getBlogPost: async function (
-    params: GetBlogsParams,
+    params?: GetBlogsParams,
     options?: serviceOptions,
   ) {
     try {
@@ -50,6 +50,17 @@ export const blogService = {
       //   if(data.succes){
       //     return {}
       //   }
+      return { data: data, error: null };
+    } catch (err) {
+      console.log(err);
+      return { data: null, error: { message: "Something went wrong" } };
+    }
+  },
+
+  getBlogPostById: async function (id: string) {
+    try {
+      const res = await fetch(`${API_URL}/posts/${id}`);
+      const data = await res.json();
       return { data: data, error: null };
     } catch (err) {
       console.log(err);
