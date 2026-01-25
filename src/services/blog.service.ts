@@ -39,13 +39,24 @@ export const blogService = {
         config.next = { revalidate: options.revalidate };
       }
 
+      config.next = { ...config, tags: ["blogPosts"] };
+
+      // const res = await fetch(url.toString(), {
+      //   ...config,
+      //   headers: {
+      //     cookie: (await cookieStore).toString(),
+      //   },
+      //   next: {
+      //     tags: ["blogPosts"],  // this line is alternative for line 42
+      //   },
+      // });
       const res = await fetch(url.toString(), {
+        ...config,
         headers: {
           cookie: (await cookieStore).toString(),
         },
       });
       const data = await res.json();
-      console.log(data);
       //* this is an example is there was property exist named success
       //   if(data.succes){
       //     return {}
