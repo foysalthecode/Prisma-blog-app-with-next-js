@@ -1,4 +1,4 @@
-import { Route } from "./types";
+import { Route } from "../types";
 
 export const userRoutes: Route[] = [
   {
@@ -6,7 +6,7 @@ export const userRoutes: Route[] = [
     items: [
       {
         title: "Create Blog",
-        url: "/create-blog",
+        url: "/dashboard/create-blog",
       },
     ],
   },

@@ -11,9 +11,10 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
-import { adminRoutes } from "@/src/adminRoutes";
-import { userRoutes } from "@/src/userRoutes";
+import { adminRoutes } from "@/src/routes/adminRoutes";
+import { userRoutes } from "@/src/routes/userRoutes";
 import { Route } from "@/src/types";
+import { Roles } from "@/src/constants/roles";
 
 export function AppSidebar({
   user,
@@ -24,10 +25,10 @@ export function AppSidebar({
   let routes: Route[] = [];
 
   switch (user.role) {
-    case "admin":
+    case Roles.admin:
       routes = adminRoutes;
       break;
-    case "user":
+    case Roles.user:
       routes = userRoutes;
       break;
 
