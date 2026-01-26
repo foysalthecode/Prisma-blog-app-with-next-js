@@ -12,6 +12,7 @@ interface serviceOptions {
 interface GetBlogsParams {
   isFeatured?: boolean;
   search?: string;
+  page?: string;
 }
 
 export const blogService = {
