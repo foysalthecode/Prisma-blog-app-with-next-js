@@ -13,6 +13,7 @@ interface GetBlogsParams {
   isFeatured?: boolean;
   search?: string;
   page?: string;
+  limit?: string;
 }
 
 export const blogService = {

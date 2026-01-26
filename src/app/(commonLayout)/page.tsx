@@ -3,6 +3,17 @@ import { blogService } from "@/src/services/blog.service";
 import { BlogPost } from "@/src/types";
 
 export default async function Home() {
+  const featuredPostsPromise = blogService.getBlogPost({ isFeatured: true });
+  const postsPromise = blogService.getBlogPost(
+    { limit: "3" },
+    { revalidate: 10 },
+  );
+
+  const [featuredPosts, posts] = await Promise.all([
+    featuredPostsPromise,
+    postsPromise,
+  ]);
+
   const { data } = await blogService.getBlogPost(
     {
       // isFeatured: true,
