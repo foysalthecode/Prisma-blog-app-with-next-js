@@ -20,6 +20,7 @@ import { authClient } from "@/lib/auth-client";
 import { useForm } from "@tanstack/react-form";
 import { toast } from "sonner";
 import * as z from "zod";
+
 const formSchema = z.object({
   password: z.string().min(8, "Minimus 8 character"),
   email: z.email(),
@@ -31,7 +32,6 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
       provider: "google",
       callbackURL: "http://localhost:3000",
     });
-    console.log(data);
   };
 
   const form = useForm({
@@ -66,7 +66,7 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
       </CardHeader>
       <CardContent>
         <form
-          id="sign-up"
+          id="sign-in"
           onSubmit={(e) => {
             e.preventDefault();
             form.handleSubmit();
